@@ -1,16 +1,27 @@
-# This is a sample Python script.
+from re import search
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+# Keeping chrome open
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_experimental_option("detach", True)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+driver = webdriver.Chrome(options=chrome_options)
+driver.get("https://www.python.org")
+
+# price_dollar = driver.find_element(By.CLASS_NAME, value="a-price-whole")
+# price_cent = driver.find_element(By.CLASS_NAME, value="a-price-fraction")
+
+search_bar = driver.find_element(By.NAME, value='q')
+print(search_bar.tag_name)
+
+documentation_link = driver.find_element(By.CSS_SELECTOR, value=".documentation-widget a")
+print(documentation_link.text)
+
+report_bug_link = driver.find_element(By.XPATH, value='//*[@id="site-map"]/div[2]/div/ul/li[3]/a')
+print(report_bug_link.text)
+
+# driver.close()
+driver.quit()
